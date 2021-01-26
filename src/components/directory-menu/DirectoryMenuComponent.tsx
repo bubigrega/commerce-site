@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { MenuItemComponent } from "../menu-item/MenuItemComponent";
+import MenuItemComponent from "../menu-item/MenuItemComponent";
 import "./directory-menu.styles.scss";
 
-const sections = [
+export const sections = [
   {
     title: "hats",
     imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
@@ -37,12 +37,20 @@ const sections = [
   },
 ];
 
+export interface items {
+  title: string;
+  imageUrl: string;
+  id?: number;
+  linkUrl: string;
+  size?: string;
+}
+
 export const DirectoryMenuComponent: React.FC<any> = () => {
-  const [items, setItems] = useState(sections);
+  const [items] = useState(sections);
   return (
     <div className="directory-menu">
-      {items.map((i: any) => (
-        <MenuItemComponent key={i.id} {...i} subtitle="SHOP NOW" />
+      {items.map(({ id, ...otherValues }) => (
+        <MenuItemComponent key={id} {...otherValues} />
       ))}
     </div>
   );
