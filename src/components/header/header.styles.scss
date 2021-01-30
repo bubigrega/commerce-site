@@ -1,0 +1,27 @@
+.header {
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 60px;
+  align-items: center;
+}
+.logo {
+  width: 30px;
+  height: 30px;
+  background-color: ghostwhite;
+  border-radius: 40%;
+  padding: 7px;
+}
+.links {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.link {
+  padding: 0 10px;
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+}
