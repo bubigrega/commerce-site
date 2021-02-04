@@ -1,11 +1,14 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/skirt.svg";
+import { auth } from "../../firebase/config";
 
 import "./header.styles.scss";
 
-const Header = () => {
-  const [logedIn] = useState(false);
+interface HeaderProps {
+  isLogged: boolean;
+}
+
+const Header = ({ isLogged }: HeaderProps) => {
   return (
     <div className="header">
       <Link to="/" className="logo-container">
@@ -18,9 +21,20 @@ const Header = () => {
         <Link to="/contact" className="link">
           CONTACT
         </Link>
-        <Link to="/sign-in-up" className="link">
-          {logedIn ? "SIGN OUT" : "SIGN IN"}
-        </Link>
+        {isLogged ? (
+          <div
+            className="link"
+            onClick={() => {
+              auth.signOut();
+            }}
+          >
+            SIGN OUT
+          </div>
+        ) : (
+          <Link to="/sign-in-up" className="link">
+            SIGN IN
+          </Link>
+        )}
       </div>
     </div>
   );

@@ -1,12 +1,20 @@
 import { ButtonHTMLAttributes } from "react";
 import "./custom-button.scss";
 
+type FormButtonProps = {
+  isGoogle?: boolean;
+};
+
 const FormButton = ({
   children,
+  isGoogle,
   ...props
-}: ButtonHTMLAttributes<HTMLButtonElement>) => {
+}: ButtonHTMLAttributes<HTMLButtonElement> & FormButtonProps) => {
   return (
-    <button {...props} className="custom-button">
+    <button
+      {...props}
+      className={`${isGoogle && "google-button"} custom-button`}
+    >
       {children}
     </button>
   );

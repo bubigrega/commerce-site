@@ -2,6 +2,8 @@ import { ChangeEvent, useState } from "react";
 import FormButton from "../buttons/CustomButton";
 import FormInput from "../form-input/FormInput";
 import "./sign-in.scss";
+import { signInWithGoogle } from "../../firebase/config";
+import { useHistory } from "react-router-dom";
 
 interface formData {
   email: string;
@@ -13,10 +15,13 @@ const SignIn = () => {
     email: "",
     password: "",
   });
+  const history = useHistory();
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((state) => ({ ...state, [name]: value }));
   };
+
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormData({ email: "", password: "" });
@@ -31,7 +36,6 @@ const SignIn = () => {
         type="email"
         required
         value={formData.email}
-        // placeholder="Email"
         name="email"
         label="Email"
       />
@@ -39,12 +43,24 @@ const SignIn = () => {
         type="password"
         required
         value={formData.password}
-        // placeholder="Password"
         name="password"
         onChange={handleChange}
         label="Password"
       />
-      <FormButton type="submit">Sign In</FormButton>
+      <div className="buttons">
+        <FormButton type="submit">Sign In</FormButton>
+        <FormButton
+          isGoogle
+          onClick={async () => {
+            const success = await signInWithGoogle();
+            if (success.user) {
+              history.push("/");
+            }
+          }}
+        >
+          Sign In With Google
+        </FormButton>
+      </div>
     </form>
   );
 };
