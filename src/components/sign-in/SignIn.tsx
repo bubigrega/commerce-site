@@ -28,40 +28,42 @@ const SignIn = () => {
   };
 
   return (
-    <form className="sign-in" onSubmit={handleSubmit}>
+    <div className="sign-in">
       <h1 className="title">I already have an account</h1>
       <span>Sign in with your email and password</span>
-      <FormInput
-        onChange={handleChange}
-        type="email"
-        required
-        value={formData.email}
-        name="email"
-        label="Email"
-      />
-      <FormInput
-        type="password"
-        required
-        value={formData.password}
-        name="password"
-        onChange={handleChange}
-        label="Password"
-      />
-      <div className="buttons">
-        <FormButton type="submit">Sign In</FormButton>
-        <FormButton
-          isGoogle
-          onClick={async () => {
-            const success = await signInWithGoogle();
-            if (success.user) {
-              history.push("/");
-            }
-          }}
-        >
-          Sign In With Google
-        </FormButton>
-      </div>
-    </form>
+      <form onSubmit={handleSubmit}>
+        <FormInput
+          onChange={handleChange}
+          type="email"
+          required
+          value={formData.email}
+          name="email"
+          label="Email"
+        />
+        <FormInput
+          type="password"
+          required
+          value={formData.password}
+          name="password"
+          onChange={handleChange}
+          label="Password"
+        />
+        <div className="buttons">
+          <FormButton type="submit">Sign In</FormButton>
+          <FormButton
+            isGoogle
+            onClick={async () => {
+              const success = await signInWithGoogle();
+              if (success.user) {
+                history.push("/");
+              }
+            }}
+          >
+            Sign In With Google
+          </FormButton>
+        </div>
+      </form>
+    </div>
   );
 };
 

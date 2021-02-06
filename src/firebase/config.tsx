@@ -11,9 +11,37 @@ const config = {
   appId: "1:360965976490:web:4ab149904fec7f1f58fbd3",
 };
 
+export const createUserProfileDocument = async (
+  userAuth: any,
+  additionalData: any
+) => {
+  if (!userAuth) return;
+
+  const userRefObject = firestore.collection("users").doc(userAuth.uid);
+
+  const userSnapObject = await userRefObject.get();
+
+  if (!userSnapObject.exists) {
+    const { displayName, email } = userAuth;
+
+    try {
+      userRefObject.set({
+        displayName,
+        email,
+        createdAt: new Date(),
+        ...additionalData,
+      });
+    } catch (error) {
+      console.log("error writting to database", error.message);
+    }
+  }
+  return userRefObject;
+};
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
+
 export const firestore = firebase.firestore();
 
 export const provider = new firebase.auth.GoogleAuthProvider();
