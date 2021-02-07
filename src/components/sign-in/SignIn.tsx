@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react";
 import FormButton from "../buttons/CustomButton";
 import FormInput from "../form-input/FormInput";
 import "./sign-in.scss";
-import { signInWithGoogle } from "../../firebase/config";
+import { auth, signInWithGoogle } from "../../firebase/config";
 import { useHistory } from "react-router-dom";
 
 interface formData {
@@ -22,9 +22,16 @@ const SignIn = () => {
     setFormData((state) => ({ ...state, [name]: value }));
   };
 
-  const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setFormData({ email: "", password: "" });
+
+    try {
+      await auth.signInWithEmailAndPassword(formData.email, formData.password);
+      setFormData({ email: "", password: "" });
+    } catch (e) {
+      console.error(e);
+    }
+    // history.push("/");
   };
 
   return (

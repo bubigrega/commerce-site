@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
-import { ReactComponent as Logo } from "../../assets/skirt.svg";
 import { auth } from "../../firebase/config";
+import { useSelector } from "react-redux";
+import { ReactComponent as Logo } from "../../assets/skirt.svg";
 
 import "./header.styles.scss";
+import { RootReducer } from "../../redux/rootReducer";
 
-interface HeaderProps {
-  isLogged: boolean;
-}
+const Header = () => {
+  const user = useSelector((state: RootReducer) => state.user.currentUser);
+  console.log(user);
 
-const Header = ({ isLogged }: HeaderProps) => {
   return (
     <div className="header">
       <Link to="/" className="logo-container">
@@ -21,7 +22,7 @@ const Header = ({ isLogged }: HeaderProps) => {
         <Link to="/contact" className="link">
           CONTACT
         </Link>
-        {isLogged ? (
+        {user ? (
           <div
             className="link"
             onClick={() => {

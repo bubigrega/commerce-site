@@ -3,6 +3,7 @@ import FormButton from "../buttons/CustomButton";
 import { auth, createUserProfileDocument } from "../../firebase/config";
 import FormInput from "../form-input/FormInput";
 import "./SignUp";
+import { useHistory } from "react-router-dom";
 
 const initState = {
   confirmPassword: "",
@@ -13,6 +14,7 @@ const initState = {
 
 const SignUp = () => {
   const [state, setState] = useState(initState);
+  const history = useHistory();
 
   const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,6 +37,7 @@ const SignUp = () => {
     } catch (err) {
       console.error(err);
     }
+    history.push("/");
   };
 
   return (

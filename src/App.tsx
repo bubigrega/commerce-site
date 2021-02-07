@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import "./App.css";
 import Header from "./components/header/HeaderComponent";
@@ -6,16 +6,11 @@ import { HomePage } from "./pages/homepage/HomePage";
 import Shop from "./pages/shop/Shop_Component";
 import SignInUp from "./pages/sign-in-up/SignInUp";
 import { auth, createUserProfileDocument } from "./firebase/config";
-
-// interface User {
-//   id: string;
-//   email: string;
-//   displayName: string;
-// }
+import { useDispatch } from "react-redux";
+import { setCurrentUser } from "./redux/user/userActions";
 
 function App() {
-  const [user, setUser] = useState<null | any>(null);
-  console.log(user);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const unsubscribeFromGoogle = auth.onAuthStateChanged(async (userAuth) => {
@@ -25,23 +20,25 @@ function App() {
         userRef?.onSnapshot((snapShot) => {
           const data = snapShot.data();
 
-          setUser({
-            id: snapShot.id,
-            ...data,
-          });
+          dispatch(
+            setCurrentUser({
+              id: snapShot.id,
+              ...data,
+            })
+          );
         });
       }
-      setUser(null);
+      dispatch(setCurrentUser(null));
     });
     return () => {
-      setUser(null);
+      dispatch(setCurrentUser(null));
       unsubscribeFromGoogle();
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="App">
-      <Header isLogged={!!user} />
+      <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={Shop} />
