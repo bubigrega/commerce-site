@@ -31,7 +31,6 @@ const SignIn = () => {
     } catch (e) {
       console.error(e);
     }
-    // history.push("/");
   };
 
   return (

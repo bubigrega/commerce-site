@@ -1,7 +1,4 @@
-type ActionReducer = {
-  type: string;
-  payload: Object;
-};
+import { UserActions } from "./userActions";
 
 export type CurrentUser = {
   id: string;
@@ -19,11 +16,11 @@ const INITIAL_STATE = {
 
 const userReducer = (
   state: User = INITIAL_STATE,
-  { type, payload }: ActionReducer
+  { type, payload }: UserActions
 ) => {
   switch (type) {
     case "SET_CURRENT_USER":
-      return { currentUser: payload };
+      return { ...state, currentUser: payload };
     default:
       return state;
   }

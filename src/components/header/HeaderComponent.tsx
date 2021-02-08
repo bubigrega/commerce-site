@@ -5,10 +5,12 @@ import { ReactComponent as Logo } from "../../assets/skirt.svg";
 
 import "./header.styles.scss";
 import { RootReducer } from "../../redux/rootReducer";
+import CartIcon from "../cart-icon/CartIcon";
+import CartDropdown from "../cart-dropdown/CartDropdown";
 
 const Header = () => {
-  const user = useSelector((state: RootReducer) => state.user.currentUser);
-  console.log(user);
+  const user = useSelector(({ user }: RootReducer) => user.currentUser);
+  const showCart = useSelector(({ cart }: RootReducer) => cart.showCart);
 
   return (
     <div className="header">
@@ -36,7 +38,9 @@ const Header = () => {
             SIGN IN
           </Link>
         )}
+        <CartIcon />
       </div>
+      {showCart && <CartDropdown />}
     </div>
   );
 };
