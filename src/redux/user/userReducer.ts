@@ -14,7 +14,7 @@ const INITIAL_STATE = {
   currentUser: null,
 };
 
-const userReducer = (
+export const userReducer = (
   state: User = INITIAL_STATE,
   { type, payload }: UserActions
 ) => {
@@ -25,5 +25,3 @@ const userReducer = (
       return state;
   }
 };
-
-export default userReducer;

@@ -2,29 +2,44 @@
   width: 22%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: 350px;
-}
+  position: relative;
 
-.image {
-  width: 100%;
-  height: 95%;
-  display: flex;
-  flex-direction: column;
-  background-position: center;
-  background-size: cover;
-  margin-bottom: 5px;
-
-  & .button {
-    margin-top: 80px;
+  &:hover {
+    .image {
+      opacity: 0.8;
+    }
+    .custom-button {
+      display: inline;
+    }
   }
-}
 
-.collection-footer {
-  width: 100%;
-  height: 5%;
-  display: flex;
-  justify-content: space-between;
-  font-size: 18px;
+  .image {
+    width: 100%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    background-position: center;
+    background-size: cover;
+    margin-bottom: 5px;
+  }
+
+  button {
+    position: absolute;
+    bottom: 60px;
+    width: 60%;
+    border-radius: 10px;
+    display: none;
+  }
+
+  .collection-footer {
+    width: 100%;
+    height: 5%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+  }
 }
 
 .name {
