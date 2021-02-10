@@ -1,6 +1,6 @@
 import React from "react";
 import { RouteComponentProps, withRouter } from "react-router-dom";
-import { items } from "../directory-menu/DirectoryMenuComponent";
+import { Item } from "../directory-menu/DirectoryMenuComponent";
 import "./menu-item.styles.scss";
 
 interface MenuItemComponentProps {
@@ -8,7 +8,7 @@ interface MenuItemComponentProps {
 }
 
 const MenuItemComponent: React.FC<
-  items & RouteComponentProps & MenuItemComponentProps
+  Item & RouteComponentProps & MenuItemComponentProps
 > = ({ title, imageUrl, size, history, subtitle, linkUrl, match }) => {
   return (
     <div

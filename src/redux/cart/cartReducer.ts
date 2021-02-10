@@ -19,7 +19,7 @@ export type CartItem = {
   quantity: number;
   name: string;
   price: number;
-  imageURL: string;
+  imageUrl: string;
 };
 
 const ind = [{ id: 3 }].findIndex((i) => i.id === 4);

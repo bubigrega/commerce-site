@@ -37,13 +37,14 @@ export const sections = [
   },
 ];
 
-export interface items {
+export interface Item {
   title: string;
   imageUrl: string;
   id?: number;
   linkUrl: string;
   size?: string;
 }
+export type Items = Item[];
 
 export const DirectoryMenuComponent: React.FC<any> = () => {
   const [items] = useState(sections);
