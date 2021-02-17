@@ -26,7 +26,7 @@ const CollectionItem = ({
       </CustomButton>
       <div className="collection-footer">
         <span className="name">{name}</span>
-        <span className="price">{`${price}.00 $`}</span>
+        <span className="price">{`${price}.00 `}&#8364;</span>
       </div>
     </div>
   );

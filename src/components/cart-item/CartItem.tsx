@@ -14,7 +14,7 @@ const CartItem = ({
       <div className="item-details">
         <span className="name">{name}</span>
         <span className="price">
-          {quantity} x {price},00 EUR
+          {quantity} x {price},00 &#8364;
         </span>
       </div>
     </div>

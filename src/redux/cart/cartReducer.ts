@@ -1,6 +1,6 @@
 import { SHOP_DATA } from "../../local-data/local-data";
 import { CartActions } from "./cartActions";
-import { cartUtils } from "./cartUtils";
+import { addItem, changeQuantity, removeItem } from "./cartUtils";
 
 const INITIAL_STATE = {
   showCart: false,
@@ -22,9 +22,6 @@ export type CartItem = {
   imageUrl: string;
 };
 
-const ind = [{ id: 3 }].findIndex((i) => i.id === 4);
-console.log(ind);
-
 export const cartReducer = (
   state: Cart = INITIAL_STATE,
   action: CartActions
@@ -36,7 +33,22 @@ export const cartReducer = (
     case "ADD_TO_CART":
       return {
         ...state,
-        cartItems: cartUtils(state.cartItems, action.payload),
+        cartItems: addItem(state.cartItems, action.payload),
+      };
+    case "REMOVE_FROM_CART":
+      return {
+        ...state,
+        cartItems: removeItem(state.cartItems, action.payload),
+      };
+    case "CHANGE_QUANTITY":
+      return {
+        ...state,
+        cartItems: changeQuantity(
+          state.cartItems,
+          action.payload.id,
+          action.payload.name,
+          action.payload.operation
+        ),
       };
 
     default:

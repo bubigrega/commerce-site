@@ -1,26 +1,35 @@
-import { shallowEqual, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { toggleCart } from "../../redux/cart/cartActions";
 
 import { selectCartItems } from "../../redux/cart/cartSelectors";
-import { RootReducer } from "../../redux/rootReducer";
 import CustomButton from "../buttons/CustomButton";
 import CartItem from "../cart-item/CartItem";
 
 import "./cart-dropdown.scss";
 
 const CartDropdown = () => {
-  const items = useSelector(
-    (state: RootReducer) => selectCartItems(state),
-    shallowEqual
-  );
+  const cartItems = useSelector(selectCartItems);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   return (
     <div className="cart-dropdown">
       <div className="cart-items">
-        {items.map((i) => (
-          <CartItem key={i.id + i.name} item={i} />
-        ))}
+        {cartItems.length ? (
+          cartItems.map((i) => <CartItem key={i.id + i.name} item={i} />)
+        ) : (
+          <span className="no-items">No items in cart</span>
+        )}
       </div>
-      <CustomButton>GO TO CHECKOUT</CustomButton>
+      <CustomButton
+        onClick={() => {
+          dispatch(toggleCart());
+          return history.push("/checkout");
+        }}
+      >
+        GO TO CHECKOUT
+      </CustomButton>
     </div>
   );
 };

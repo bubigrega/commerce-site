@@ -8,10 +8,11 @@ import SignInUp from "./pages/sign-in-up/SignInUp";
 import { auth, createUserProfileDocument } from "./firebase/config";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "./redux/user/userActions";
-import { RootReducer } from "./redux/rootReducer";
+import { selectCurrentUser } from "./redux/user/userSelectors";
+import CheckOut from "./pages/check-out/checkOut";
 
 function App() {
-  const user = useSelector((state: RootReducer) => state.user.currentUser);
+  const user = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -44,6 +45,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={Shop} />
+        <Route exact path="/checkout" component={CheckOut} />
         <Route
           exact
           path="/sign-in-up"

@@ -4,13 +4,14 @@ import { useSelector } from "react-redux";
 import { ReactComponent as Logo } from "../../assets/skirt.svg";
 
 import "./header.styles.scss";
-import { RootReducer } from "../../redux/rootReducer";
 import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/CartDropdown";
+import { selectCurrentUser } from "../../redux/user/userSelectors";
+import { selectCartShow } from "../../redux/cart/cartSelectors";
 
 const Header = () => {
-  const user = useSelector(({ user }: RootReducer) => user.currentUser);
-  const showCart = useSelector(({ cart }: RootReducer) => cart.showCart);
+  const user = useSelector(selectCurrentUser);
+  const showCart = useSelector(selectCartShow);
 
   return (
     <div className="header">
