@@ -13,17 +13,17 @@ export const addToCart = (item: Item) => {
   };
 };
 
-export const removeFromCart = (id: number) => {
+export const clearFromCart = (item: Item) => {
   return <const>{
-    type: "REMOVE_FROM_CART",
-    payload: id,
+    type: "CLEAR_FROM_CART",
+    payload: item,
   };
 };
 
-export const changeQuantity = (id: number, name: string, operation: string) => {
+export const removeFromCart = (item: Item) => {
   return <const>{
-    type: "CHANGE_QUANTITY",
-    payload: { id, name, operation },
+    type: "REMOVE_FROM_CART",
+    payload: item,
   };
 };
 
@@ -31,4 +31,4 @@ export type CartActions =
   | ReturnType<typeof toggleCart>
   | ReturnType<typeof addToCart>
   | ReturnType<typeof removeFromCart>
-  | ReturnType<typeof changeQuantity>;
+  | ReturnType<typeof clearFromCart>;

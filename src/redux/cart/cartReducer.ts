@@ -1,6 +1,6 @@
 import { SHOP_DATA } from "../../local-data/local-data";
 import { CartActions } from "./cartActions";
-import { addItem, changeQuantity, removeItem } from "./cartUtils";
+import { addItem, removeItem } from "./cartUtils";
 
 const INITIAL_STATE = {
   showCart: false,
@@ -35,19 +35,18 @@ export const cartReducer = (
         ...state,
         cartItems: addItem(state.cartItems, action.payload),
       };
+
     case "REMOVE_FROM_CART":
       return {
         ...state,
         cartItems: removeItem(state.cartItems, action.payload),
       };
-    case "CHANGE_QUANTITY":
+
+    case "CLEAR_FROM_CART":
       return {
         ...state,
-        cartItems: changeQuantity(
-          state.cartItems,
-          action.payload.id,
-          action.payload.name,
-          action.payload.operation
+        cartItems: state.cartItems.filter(
+          (i) => i.id !== action.payload.id && i.name !== action.payload.name
         ),
       };
 

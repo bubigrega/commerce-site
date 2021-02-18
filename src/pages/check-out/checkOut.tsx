@@ -27,7 +27,7 @@ const CheckOut = () => {
         </div>
       </div>
       {items.map((item) => (
-        <CheckOutItem key={item.id + item.name} {...item} />
+        <CheckOutItem key={item.id + item.name} item={item} />
       ))}
       <div className="total">
         <span>{`TOTAL: ${sum},00 `}&#8364;</span>

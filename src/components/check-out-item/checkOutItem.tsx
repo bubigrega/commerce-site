@@ -1,10 +1,22 @@
+import { memo } from "react";
 import { useDispatch } from "react-redux";
-import { changeQuantity, removeFromCart } from "../../redux/cart/cartActions";
+import {
+  addToCart,
+  clearFromCart,
+  removeFromCart,
+} from "../../redux/cart/cartActions";
 import { CartItem } from "../../redux/cart/cartReducer";
 import "./check-out-item.scss";
 
-const CheckOutItem = ({ id, imageUrl, name, price, quantity }: CartItem) => {
+interface CheckOutItemProps {
+  item: CartItem;
+}
+
+const CheckOutItem = ({ item }: CheckOutItemProps) => {
   const dispatch = useDispatch();
+  console.log(item);
+
+  const { imageUrl, name, price, quantity } = item;
 
   return (
     <div className="check-out-item">
@@ -15,17 +27,11 @@ const CheckOutItem = ({ id, imageUrl, name, price, quantity }: CartItem) => {
         <span>{name}</span>
       </div>
       <div className="item-block quantity">
-        <span
-          className="button"
-          onClick={() => dispatch(changeQuantity(id, name, "-"))}
-        >
+        <span className="button" onClick={() => dispatch(removeFromCart(item))}>
           &#10134;
         </span>
         <span>{quantity}</span>
-        <span
-          className="button"
-          onClick={() => dispatch(changeQuantity(id, name, "+"))}
-        >
+        <span className="button" onClick={() => dispatch(addToCart(item))}>
           &#10133;
         </span>
       </div>
@@ -33,10 +39,10 @@ const CheckOutItem = ({ id, imageUrl, name, price, quantity }: CartItem) => {
         <span>{`${price * quantity},00 `}&#8364;</span>
       </div>
       <div className="item-remove">
-        <span onClick={() => dispatch(removeFromCart(id))}>&#10005;</span>
+        <span onClick={() => dispatch(clearFromCart(item))}>&#10005;</span>
       </div>
     </div>
   );
 };
 
-export default CheckOutItem;
+export default memo(CheckOutItem);
